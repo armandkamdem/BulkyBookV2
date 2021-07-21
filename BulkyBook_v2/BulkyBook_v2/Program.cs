@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace BulkyBook_v2
+namespace BulkyBookV2
 {
     public class Program
     {
