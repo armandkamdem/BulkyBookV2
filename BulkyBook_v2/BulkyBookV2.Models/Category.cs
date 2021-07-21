@@ -10,7 +10,7 @@ namespace BulkyBookV2.Models
     public class Category
     {
         [Key]
-        public int CategoryId { get; set; }
+        public int Id { get; set; }
         [Display(Name="Category Name")]
         [Required]
         [MaxLength(50)]

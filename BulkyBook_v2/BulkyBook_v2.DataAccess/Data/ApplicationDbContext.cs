@@ -13,7 +13,6 @@ namespace BulkyBookV2.DataAccess.Data
             : base(options)
         {
         }
-
         public DbSet<Category> Categories { get; set; }
     }
 }

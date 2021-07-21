@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "e5zfA3DD3vNq2YWEDYMImwuDPFKHEgndzqNPtjqvAazFjCN/DexOXVUVZpMTpCL0zQ5zTRYQ26QxzCHpOoOuvQ==",
+  "dgSpecHash": "jRCFAFQYcxf0TiJ6rlYZCAm/A9PBPXOWR7bidYuZhQ4sk2TJEdOqfdXjBxeuREF+Voq3/1584zSVWDWrF6oB/w==",
   "success": true,
   "projectFilePath": "D:\\Kokaar\\IT\\Projects\\Learning\\Udemy\\Complete guide to ASP.NET Core MVC (.NET 5)\\Me\\BulkyBook_v2\\BulkyBook_v2\\BulkyBookV2.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\HP ZBOOK\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",
     "C:\\Users\\HP ZBOOK\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\HP ZBOOK\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.8\\microsoft.aspnetcore.cryptography.internal.5.0.8.nupkg.sha512",
     "C:\\Users\\HP ZBOOK\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.8\\microsoft.aspnetcore.cryptography.keyderivation.5.0.8.nupkg.sha512",
