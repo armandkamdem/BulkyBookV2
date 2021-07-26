@@ -1,8 +1,5 @@
 ﻿using BulkyBookV2.DataAccess.Data;
 using BulkyBookV2.DataAccess.Repository.IRepository;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BulkyBookV2.DataAccess.Repository
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BulkyBookV2.DataAccess.Repository.IRepository;
+﻿using BulkyBookV2.DataAccess.Repository.IRepository;
 using BulkyBookV2.Models;
 using BulkyBookV2.Utilities;
 using Dapper;
