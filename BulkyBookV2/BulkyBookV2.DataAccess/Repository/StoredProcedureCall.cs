@@ -34,7 +34,7 @@ namespace BulkyBookV2.DataAccess.Repository
             }
         }
 
-        public IEnumerable<T> List<T>(string procedureName, DynamicParameters param = null)
+        public IEnumerable<T> GetRecords<T>(string procedureName, DynamicParameters param = null)
         {
             using (SqlConnection sqlCon = new SqlConnection(ConnectionString))
             {
@@ -43,7 +43,7 @@ namespace BulkyBookV2.DataAccess.Repository
             }
         }
 
-        public Tuple<IEnumerable<T1>, IEnumerable<T2>> List<T1, T2>(string procedureName, DynamicParameters param = null)
+        public Tuple<IEnumerable<T1>, IEnumerable<T2>> GetMultipleRecords<T1, T2>(string procedureName, DynamicParameters param = null)
         {
             using (SqlConnection sqlCon = new SqlConnection(ConnectionString))
             {
@@ -63,7 +63,7 @@ namespace BulkyBookV2.DataAccess.Repository
             return new Tuple<IEnumerable<T1>, IEnumerable<T2>>(new List<T1>(), new List<T2>());
         }
 
-        public T OneRecord<T>(string procedureName, DynamicParameters param = null)
+        public T GetRecord<T>(string procedureName, DynamicParameters param = null)
         {
             using (SqlConnection sqlCon = new SqlConnection(ConnectionString))
             {
@@ -73,7 +73,7 @@ namespace BulkyBookV2.DataAccess.Repository
             }
         }
 
-        public T Single<T>(string procedureName, DynamicParameters param = null)
+        public T ExecuteScalar<T>(string procedureName, DynamicParameters param = null)
         {
             using (SqlConnection sqlCon = new SqlConnection(ConnectionString))
             {

@@ -32,7 +32,7 @@ namespace BulkyBookV2.Areas.Admin.Controllers
             //this is for edit
             var parameter = new DynamicParameters();
             parameter.Add("@Id", id);
-            coverType = _unitOfWork.StoredProcedureCall.OneRecord<CoverType>(StaticDetails.Proc_CoverType_Get, parameter);
+            coverType = _unitOfWork.StoredProcedureCall.GetRecord<CoverType>(StaticDetails.Proc_CoverType_Get, parameter);
             if (coverType == null)
             {
                 return NotFound();
@@ -72,7 +72,7 @@ namespace BulkyBookV2.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var allObj = _unitOfWork.StoredProcedureCall.List<CoverType>(StaticDetails.Proc_CoverType_GetAll, null);
+            var allObj = _unitOfWork.StoredProcedureCall.GetRecords<CoverType>(StaticDetails.Proc_CoverType_GetAll, null);
             return Json(new { data = allObj });
         }
 
@@ -81,7 +81,7 @@ namespace BulkyBookV2.Areas.Admin.Controllers
         {
             var parameter = new DynamicParameters();
             parameter.Add("@Id", id);
-            var objFromDb = _unitOfWork.StoredProcedureCall.OneRecord<CoverType>(StaticDetails.Proc_CoverType_Get, parameter);
+            var objFromDb = _unitOfWork.StoredProcedureCall.GetRecord<CoverType>(StaticDetails.Proc_CoverType_Get, parameter);
             if (objFromDb == null)
             {
                 return Json(new { success = false, message = "Error while deleting" });
