@@ -1,6 +1,6 @@
 ﻿using BulkyBookV2.DataAccess.Repository.IRepository;
 using BulkyBookV2.Models;
-using BulkyBookV2.Utilities;
+using BulkyBookV2.Utility;
 using Dapper;
 using Microsoft.AspNetCore.Mvc;
 
