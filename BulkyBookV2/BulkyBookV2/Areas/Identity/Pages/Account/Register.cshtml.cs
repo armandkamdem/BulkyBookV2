@@ -97,7 +97,7 @@ namespace BulkyBookV2.Areas.Identity.Pages.Account
                     Text = i.Name,
                     Value = i.Id.ToString()
                 }),
-                RoleList = _roleManager.Roles.Where(u => u.Name != StaticDetails.Role_User_Individual).Select(x=>x.Name).Select(i => new SelectListItem
+                RoleList = _roleManager.Roles.Where(u => u.Name != StaticDetails.Role_User_Individual).Select(x => x.Name).Select(i => new SelectListItem
                 {
                     Text = i,
                     Value = i
@@ -131,7 +131,7 @@ namespace BulkyBookV2.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    if(!await _roleManager.RoleExistsAsync(StaticDetails.Role_Admin))
+                    if (!await _roleManager.RoleExistsAsync(StaticDetails.Role_Admin))
                     {
                         await _roleManager.CreateAsync(new IdentityRole(StaticDetails.Role_Admin));
                     }
@@ -154,7 +154,7 @@ namespace BulkyBookV2.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        if(user.CompanyId > 0)
+                        if (user.CompanyId > 0)
                         {
                             await _userManager.AddToRoleAsync(user, StaticDetails.Role_User_Company);
                         }
