@@ -4,11 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using BulkyBookV2.DataAccess.Repository.IRepository;
 using BulkyBookV2.Models;
+using BulkyBookV2.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BulkyBookV2.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = StaticDetails.Role_Admin + ", " + StaticDetails.Role_Employee)]
     public class CompanyController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -50,7 +53,7 @@ namespace BulkyBookV2.Areas.Admin.Controllers
                 if (company.Id == 0)
                 {
                     _unitOfWork.Company.Add(company);
-                    
+
                 }
                 else
                 {

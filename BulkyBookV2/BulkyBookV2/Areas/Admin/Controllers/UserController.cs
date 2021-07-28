@@ -5,11 +5,15 @@ using System.Threading.Tasks;
 using BulkyBookV2.DataAccess.Data;
 using BulkyBookV2.DataAccess.Repository.IRepository;
 using BulkyBookV2.Models;
+using BulkyBookV2.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 namespace BulkyBookV2.Areas.Admin.Controllers
 {
     [Area("Admin")]
+
+    [Authorize(Roles = StaticDetails.Role_Admin + ", " + StaticDetails.Role_Employee)]
     public class UserController : Controller
     {
         private readonly ApplicationDbContext _db;
