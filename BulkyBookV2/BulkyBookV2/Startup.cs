@@ -40,6 +40,17 @@ namespace BulkyBookV2
                 options.LogoutPath = $"/Identity/Account/Logout";
                 options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
             });
+            services.AddAuthentication().AddFacebook(options =>
+            {
+                options.AppId = "285941236666819";
+                options.AppSecret = "22abe406faa151c5a05af61b620a1376";
+            });
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = "910515816196-jve1ijo4k4kpg9tmte45qehb7qn0o79d.apps.googleusercontent.com";
+                options.ClientSecret = "0fklW-vlEDB4h117DCDYsjMX";
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
