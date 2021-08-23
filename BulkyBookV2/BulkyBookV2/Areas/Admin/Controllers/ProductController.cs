@@ -32,7 +32,7 @@ namespace BulkyBookV2.Areas.Admin.Controllers
 
         public IActionResult Upsert(int? id)
         {
-            ProductViewModel productVM = new ProductViewModel()
+            ProductVM productVM = new ProductVM()
             {
                 Product = new Product(),
                 CategoryList = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
@@ -63,7 +63,7 @@ namespace BulkyBookV2.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(ProductViewModel productVM)
+        public IActionResult Upsert(ProductVM productVM)
         {
             if (ModelState.IsValid)
             {
