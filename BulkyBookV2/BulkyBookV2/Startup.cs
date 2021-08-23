@@ -1,6 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,9 +34,10 @@ namespace BulkyBookV2
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser,IdentityRole>().AddDefaultTokenProviders()
+            services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<EmailOptions>(Configuration);
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -42,14 +49,20 @@ namespace BulkyBookV2
             });
             services.AddAuthentication().AddFacebook(options =>
             {
-                options.AppId = "285941236666819";
-                options.AppSecret = "22abe406faa151c5a05af61b620a1376";
+                options.AppId = "479144716347128";
+                options.AppSecret = "8888cefba55e9cfa06a2b28f0495e533";
             });
             services.AddAuthentication().AddGoogle(options =>
             {
-                options.ClientId = "910515816196-jve1ijo4k4kpg9tmte45qehb7qn0o79d.apps.googleusercontent.com";
-                options.ClientSecret = "0fklW-vlEDB4h117DCDYsjMX";
+                options.ClientId = "751413081977-ct8rrlcf8cgt8f42b5evots13mg458lt.apps.googleusercontent.com";
+                options.ClientSecret = "LPRLug47n8OQsYAirUVGofLw";
 
+            });
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
             });
         }
 
@@ -59,7 +72,7 @@ namespace BulkyBookV2
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseMigrationsEndPoint();
+                app.UseDatabaseErrorPage();
             }
             else
             {
@@ -71,7 +84,7 @@ namespace BulkyBookV2
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
 

@@ -13,7 +13,7 @@ namespace BulkyBookV2.Areas.Admin.Controllers
 {
     [Area("Admin")]
 
-    [Authorize(Roles = StaticDetails.Role_Admin + ", " + StaticDetails.Role_Employee)]
+    [Authorize(Roles = SD.Role_Admin + ", " + SD.Role_Employee)]
     public class UserController : Controller
     {
         private readonly ApplicationDbContext _db;

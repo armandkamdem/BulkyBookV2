@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BulkyBookV2.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = StaticDetails.Role_Admin)]
+    [Authorize(Roles = SD.Role_Admin)]
     public class CoverTypeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -34,7 +34,7 @@ namespace BulkyBookV2.Areas.Admin.Controllers
             //this is for edit
             var parameter = new DynamicParameters();
             parameter.Add("@Id", id);
-            coverType = _unitOfWork.StoredProcedureCall.GetRecord<CoverType>(StaticDetails.Proc_CoverType_Get, parameter);
+            coverType = _unitOfWork.StoredProcedureCall.GetRecord<CoverType>(SD.Proc_CoverType_Get, parameter);
             if (coverType == null)
             {
                 return NotFound();
@@ -54,13 +54,13 @@ namespace BulkyBookV2.Areas.Admin.Controllers
 
                 if (coverType.Id == 0)
                 {
-                    _unitOfWork.StoredProcedureCall.Execute(StaticDetails.Proc_CoverType_Create, parameter);
+                    _unitOfWork.StoredProcedureCall.Execute(SD.Proc_CoverType_Create, parameter);
 
                 }
                 else
                 {
                     parameter.Add("@Id", coverType.Id);
-                    _unitOfWork.StoredProcedureCall.Execute(StaticDetails.Proc_CoverType_Update, parameter);
+                    _unitOfWork.StoredProcedureCall.Execute(SD.Proc_CoverType_Update, parameter);
                 }
                 _unitOfWork.Save();
                 return RedirectToAction(nameof(Index));
@@ -74,7 +74,7 @@ namespace BulkyBookV2.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var allObj = _unitOfWork.StoredProcedureCall.GetRecords<CoverType>(StaticDetails.Proc_CoverType_GetAll, null);
+            var allObj = _unitOfWork.StoredProcedureCall.GetRecords<CoverType>(SD.Proc_CoverType_GetAll, null);
             return Json(new { data = allObj });
         }
 
@@ -83,12 +83,12 @@ namespace BulkyBookV2.Areas.Admin.Controllers
         {
             var parameter = new DynamicParameters();
             parameter.Add("@Id", id);
-            var objFromDb = _unitOfWork.StoredProcedureCall.GetRecord<CoverType>(StaticDetails.Proc_CoverType_Get, parameter);
+            var objFromDb = _unitOfWork.StoredProcedureCall.GetRecord<CoverType>(SD.Proc_CoverType_Get, parameter);
             if (objFromDb == null)
             {
                 return Json(new { success = false, message = "Error while deleting" });
             }
-            _unitOfWork.StoredProcedureCall.Execute(StaticDetails.Proc_CoverType_Delete, parameter);
+            _unitOfWork.StoredProcedureCall.Execute(SD.Proc_CoverType_Delete, parameter);
             _unitOfWork.Save();
             return Json(new { success = true, message = "Delete Successful" });
 
