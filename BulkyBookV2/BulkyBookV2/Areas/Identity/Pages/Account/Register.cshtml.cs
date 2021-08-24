@@ -97,7 +97,7 @@ namespace BulkyBookV2.Areas.Identity.Pages.Account
                     Text = i.Name,
                     Value = i.Id.ToString()
                 }),
-                RoleList = _roleManager.Roles.Where(u => u.Name != SD.Role_User_Indi).Select(x => x.Name).Select(i => new SelectListItem
+                RoleList = _roleManager.Roles.Where(u => u.Name != SD.Role_Individual_Customer).Select(x => x.Name).Select(i => new SelectListItem
                 {
                     Text = i,
                     Value = i
@@ -139,24 +139,24 @@ namespace BulkyBookV2.Areas.Identity.Pages.Account
                     {
                         await _roleManager.CreateAsync(new IdentityRole(SD.Role_Employee));
                     }
-                    if (!await _roleManager.RoleExistsAsync(SD.Role_User_Comp))
+                    if (!await _roleManager.RoleExistsAsync(SD.Role_Company_Customer))
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.Role_User_Comp));
+                        await _roleManager.CreateAsync(new IdentityRole(SD.Role_Company_Customer));
                     }
-                    if (!await _roleManager.RoleExistsAsync(SD.Role_User_Indi))
+                    if (!await _roleManager.RoleExistsAsync(SD.Role_Individual_Customer))
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.Role_User_Indi));
+                        await _roleManager.CreateAsync(new IdentityRole(SD.Role_Individual_Customer));
                     }
 
                     if (user.Role == null)
                     {
-                        await _userManager.AddToRoleAsync(user, SD.Role_User_Indi);
+                        await _userManager.AddToRoleAsync(user, SD.Role_Individual_Customer);
                     }
                     else
                     {
                         if (user.CompanyId > 0)
                         {
-                            await _userManager.AddToRoleAsync(user, SD.Role_User_Comp);
+                            await _userManager.AddToRoleAsync(user, SD.Role_Company_Customer);
                         }
                         await _userManager.AddToRoleAsync(user, user.Role);
                     }
@@ -169,7 +169,7 @@ namespace BulkyBookV2.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    await _emailSender.SendEmailAsync(Input.Email, "BulkyBook V2 : Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
@@ -195,6 +195,19 @@ namespace BulkyBookV2.Areas.Identity.Pages.Account
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
+            Input = new InputModel()
+            {
+                CompanyList = _unitOfWork.Company.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }),
+                RoleList = _roleManager.Roles.Where(u => u.Name != SD.Role_Individual_Customer).Select(x => x.Name).Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
+                })
+            };
 
             // If we got this far, something failed, redisplay form
             return Page();

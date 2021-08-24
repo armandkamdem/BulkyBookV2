@@ -38,7 +38,10 @@ namespace BulkyBookV2
             services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddSingleton<IEmailSender, EmailSender>();
-            services.Configure<EmailOptions>(Configuration);
+            //services.Configure<EmailOptions>(Configuration);
+            //Kokaar--
+            services.Configure<EmailOptions>(Configuration.GetSection(EmailOptions.ConfigSectionName));
+            //Kokaar--
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllersWithViews();
