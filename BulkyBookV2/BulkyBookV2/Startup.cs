@@ -16,6 +16,7 @@ using BulkyBookV2.DataAccess.Repository.IRepository;
 using BulkyBookV2.DataAccess.Repository;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using BulkyBookV2.Utility;
+using Stripe;
 
 namespace BulkyBookV2
 {
@@ -38,6 +39,7 @@ namespace BulkyBookV2
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddSingleton<IEmailSender, EmailSender>();
             services.Configure<EmailOptions>(Configuration);
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -84,6 +86,7 @@ namespace BulkyBookV2
             app.UseStaticFiles();
 
             app.UseRouting();
+            StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
             app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
