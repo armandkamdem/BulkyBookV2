@@ -52,8 +52,12 @@ namespace BulkyBookV2.Utility
             }
         }
 
+        //Kokaar--
         public static string ConvertToRawHtml(string source)
         {
+            if (string.IsNullOrWhiteSpace(source))
+                return string.Empty;
+
             char[] array = new char[source.Length];
             int arrayIndex = 0;
             bool inside = false;
