@@ -17,6 +17,8 @@ using BulkyBookV2.DataAccess.Repository;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using BulkyBookV2.Utility;
 using Stripe;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using BulkyBookV2.DataAccess.Initializer;
 
 namespace BulkyBookV2
 {
@@ -42,8 +44,10 @@ namespace BulkyBookV2
             //Kokaar--
             services.Configure<EmailOptions>(Configuration.GetSection(EmailOptions.ConfigSectionName));
             //Kokaar--
+            services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IDbInitializer, DbInitializer>();
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.ConfigureApplicationCookie(options =>
@@ -72,7 +76,7 @@ namespace BulkyBookV2
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -94,6 +98,7 @@ namespace BulkyBookV2
             app.UseAuthentication();
             app.UseAuthorization();
 
+            dbInitializer.Initialize();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
